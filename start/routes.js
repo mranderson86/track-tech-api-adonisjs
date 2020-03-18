@@ -17,7 +17,7 @@
 const Route = use("Route");
 
 Route.get("/", () => {
-  return { greeting: "Hello world in JSON" };
+  return { Message: "Tracking Service Is Running" };
 });
 
 // Cadastro de usuários
@@ -25,3 +25,14 @@ Route.post("/users", "UserController.create");
 
 // Autenticação de usuários
 Route.post("/sessions", "SessionController.create");
+
+// Cria todas as rotas de CRUD (create , read, update , delete)
+// para Tecnlogias
+Route.resource("technologies", "TechnologyController")
+  .apiOnly()
+  .middleware("auth");
+
+// Cria todas as rotas de CRUD para Check-Ins
+Route.resource("checkins", "CheckInController")
+  .apiOnly()
+  .middleware("auth");
