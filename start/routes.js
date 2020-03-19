@@ -23,16 +23,24 @@ Route.get("/", () => {
 // Cadastro de usuários
 Route.post("/users", "UserController.create");
 
+Route.get("/users", "UserController.index").middleware("auth");
+
+Route.get("/users/profile", "UserController.show").middleware("auth");
+
+Route.get("/users/today", "UserController.today").middleware("auth");
+
 // Autenticação de usuários
 Route.post("/sessions", "SessionController.create");
 
 // Cria todas as rotas de CRUD (create , read, update , delete)
 // para Tecnlogias
-Route.resource("technologies", "TechnologyController")
+Route.resource("/technologies", "TechnologyController")
   .apiOnly()
   .middleware("auth");
 
 // Cria todas as rotas de CRUD para Check-Ins
-Route.resource("checkins", "CheckInController")
+Route.resource("/checkins", "CheckInController")
   .apiOnly()
   .middleware("auth");
+
+// Route.get("/checkins/today", "CheckInController.today").middleware("auth");

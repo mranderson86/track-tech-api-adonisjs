@@ -1,6 +1,7 @@
 "use strict";
 
 const CheckInModel = use("App/Models/CheckIn");
+const User = use("App/Models/User");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -10,6 +11,26 @@ const CheckInModel = use("App/Models/CheckIn");
  * Resourceful controller for interacting with checkins
  */
 class CheckInController {
+  /**
+   * Show a list of all checkins of user in today.
+   * GET checkins/today
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   * @param {View} ctx.view
+   */
+  async today({ auth, request, response }) {
+    console.log("today");
+
+    const user = await User.findOrFail(auth.user.id);
+    const userCheckIns = await user.checkIns().fetch();
+
+    //.where("created_at", "2020-03-18")
+
+    return userCheckIns;
+  }
+
   /**
    * Show a list of all checkins.
    * GET checkins
