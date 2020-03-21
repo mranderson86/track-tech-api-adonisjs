@@ -44,6 +44,9 @@ Route.group(() => {
   // consulta perfil do usuário
   Route.get("/users/profile", "UserController.show");
 
+  // consulta tecnologias por usuário
+  Route.get("/users/checkins", "UserController.checkins");
+
   // Cadastro de Tecnologias
   Route.post("/technologies");
 
@@ -51,14 +54,9 @@ Route.group(() => {
   Route.get("/technologies", "TechnologyController.index");
 
   // Consulta Check-Ins por tecnologia
-  Route.get("/technologies/checkins", "TechnologyController.all");
+  Route.get("/technologies/checkins", "TechnologyController.checkins");
 
   //Route.resource("/checkins", "CheckInController");
   // Cadastro de check-ins
   Route.post("/checkins", "CheckInController.store");
-
-  // Consulta Check-Ins por Usuário
-  Route.get("/checkins", "CheckInController.index");
 }).middleware("auth");
-
-// Route.get("/checkins/today", "CheckInController.today").middleware("auth");
