@@ -48,7 +48,7 @@ Route.group(() => {
   Route.get("/users/checkins", "UserController.checkins");
 
   // Cadastro de Tecnologias
-  Route.post("/technologies");
+  Route.post("/technologies", "TechnologyController.store");
 
   // Consulta todas as tecnologias
   Route.get("/technologies", "TechnologyController.index");
