@@ -26,6 +26,26 @@ class TechnologyController {
   }
 
   /**
+   * Show a list of all technologies.
+   * GET technologies
+   *
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   */
+  async checkins({ request, response }) {
+    const dateToday = new Date();
+
+    const users = await Technology.query()
+      .whereHas("users", ">", 0)
+      .with("users", builder => {
+        builder.wherePivot("date_checkIn", dateToday);
+      })
+      .fetch();
+
+    return users;
+  }
+
+  /**
    * Create/save a new technology.
    * POST technologies
    *

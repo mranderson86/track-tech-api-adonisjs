@@ -11,24 +11,16 @@ const User = use("App/Models/User");
  * Resourceful controller for interacting with checkins
  */
 class CheckInController {
-  /**
-   * Show a list of all checkins of user in today.
-   * GET checkins/today
-   *
-   * @param {object} ctx
-   * @param {Request} ctx.request
-   * @param {Response} ctx.response
-   * @param {View} ctx.view
-   */
-  async today({ auth, request, response }) {
-    console.log("today");
-
+  async user({ auth, request, response, view }) {
     const user = await User.findOrFail(auth.user.id);
-    const userCheckIns = await user.checkIns().fetch();
+    const dateToday = new Date();
 
-    //.where("created_at", "2020-03-18")
+    const tech = await user
+      .technologies()
+      .wherePivot("date_checkIn", dateToday)
+      .fetch();
 
-    return userCheckIns;
+    return tech;
   }
 
   /**
@@ -41,9 +33,32 @@ class CheckInController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    const checkIns = await CheckInModel.all();
+    // const users = await User.all();
+    const dateToday = new Date();
 
-    return checkIns;
+    // OK - Todos os usuários com suas respectivas tecnologias
+    // Filtrado por data
+    //const techs = await User.query()
+    //.with("technologies", builder => {
+    //  builder.wherePivot("date_checkIn", dateToday);
+    //})
+    //.fetch();
+
+    // OK - Filtra todos os usuários que fizeram check-in no dia
+    // e quais foram as tecnologias foram feitas o chck-in
+    const techs = await User.query()
+      .whereHas("technologies", ">", 0)
+      .with("technologies", builder => {
+        builder.wherePivot("date_checkIn", dateToday);
+      })
+      .fetch();
+
+    // OK - Todos os usuários com suas respectivas tecnologias
+    // const techs = await User.query()
+    //  .with("technologies")
+    //  .fetch();
+
+    return techs;
   }
 
   /**
@@ -59,7 +74,8 @@ class CheckInController {
 
     const data = {
       technology_id: technology_id,
-      user_id: auth.user.id
+      user_id: auth.user.id,
+      date_checkIn: new Date()
     };
 
     const checkIn = await CheckInModel.create(data);

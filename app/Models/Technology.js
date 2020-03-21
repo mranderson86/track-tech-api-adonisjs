@@ -4,14 +4,8 @@
 const Model = use("Model");
 
 class Technology extends Model {
-  // Uma tecnologia pode ter muitos usuários
   users() {
-    return this.hasMany("App/Models/Technology");
-  }
-
-  // Uma tecnologia pode ter muitos check-ins
-  checkIns() {
-    return this.hasMany("App/Models/CheckIn");
+    return this.belongsToMany("App/Models/User").pivotTable("check_ins");
   }
 }
 

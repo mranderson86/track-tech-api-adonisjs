@@ -36,11 +36,16 @@ class User extends Model {
   }
 
   // Um usuário pode ter muitos check-ins
-  checkIns() {
+  checkins() {
     return this.hasMany("App/Models/CheckIn");
+    //return this.belongsToMany("App/Models/Technology").pivotTable("CheckIn");
   }
 
-  // Um usuário pode ter muitas technologias
+  technologies() {
+    return this.belongsToMany("App/Models/Technology").pivotTable("check_ins");
+  }
+
+  // Um usuário pode ter muitas tecnologias
   //  technologies() {
   //  return this.hasMany("App/Models/Technology");
   //}

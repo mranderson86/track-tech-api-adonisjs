@@ -46,14 +46,17 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async today({ auth, request, response, view }) {
-    const user = await User.findOrFail(auth.user.id);
-    //const userCheckin = user.checkIns().fetch();
-    const userCheckin = user
-      .checkIns()
-      .where("created_at", "2020-03-18")
+  async checkins({ auth, request, response, view }) {
+    // OK - Filtra todos os usuários que fizeram check-in no dia
+    // e quais foram as tecnologias foram feitas o chck-in
+    const techs = await User.query()
+      .whereHas("technologies", ">", 0)
+      .with("technologies", builder => {
+        builder.wherePivot("date_checkIn", dateToday);
+      })
       .fetch();
-    return userCheckin;
+
+    return techs;
   }
 
   async create({ request }) {
