@@ -70,10 +70,10 @@ class CheckInController {
    * @param {Response} ctx.response
    */
   async store({ auth, request, response }) {
-    const technology_id = request.body.technology_id;
+    const { technology_id } = request.body;
 
     const data = {
-      technology_id: technology_id,
+      technology_id,
       user_id: auth.user.id,
       date_checkIn: new Date()
     };
