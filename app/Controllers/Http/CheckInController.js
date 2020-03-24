@@ -74,8 +74,9 @@ class CheckInController {
     const technologies = Object.values(request.body);
 
     const data = technologies.map(tech => {
+      const { technology_id } = tech;
       return {
-        ...tech,
+        technology_id,
         user_id: auth.user.id,
         date_checkIn: new Date()
       };
