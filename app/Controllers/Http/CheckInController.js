@@ -70,16 +70,19 @@ class CheckInController {
    * @param {Response} ctx.response
    */
   async store({ auth, request, response }) {
-    const { technology_id } = request.body;
+    // Converte um objeto em array
+    const technologies = Object.values(request.body);
 
-    const data = {
-      technology_id,
-      user_id: auth.user.id,
-      date_checkIn: new Date()
-    };
+    const data = technologies.map(tech => {
+      return {
+        ...tech,
+        user_id: auth.user.id,
+        date_checkIn: new Date()
+      };
+    });
 
-    const checkIn = await CheckInModel.create(data);
-    return checkIn;
+    const checkins = await CheckInModel.createMany(data);
+    return checkins;
   }
 
   /**
