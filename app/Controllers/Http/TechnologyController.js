@@ -26,8 +26,30 @@ class TechnologyController {
   }
 
   /**
-   * Show a list of all technologies.
+   * Show a list of all technologies available for current user.
    * GET technologies
+   *
+   * @param {object} ctx
+   * @param {Request} ctx.request
+   * @param {Response} ctx.response
+   * @param {View} ctx.view
+   */
+  async available({ response }) {
+    const dateToday = new Date();
+
+    const technologies = await Technology.query()
+      .whereHas("users", ">", 0)
+      .with("users", builder => {
+        builder.wherePivot("date_checkIn", dateToday);
+      })
+      .fetch();
+
+    return technologies;
+  }
+
+  /**
+   * Show a list of all technologies.
+   * GET users by technology
    *
    * @param {Request} ctx.request
    * @param {Response} ctx.response
