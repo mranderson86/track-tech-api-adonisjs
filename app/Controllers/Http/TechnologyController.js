@@ -27,6 +27,7 @@ class TechnologyController {
 
   /**
    * Show a list of all technologies available for current user.
+   * api/technologies/available
    * GET technologies
    *
    * @param {object} ctx
@@ -34,7 +35,7 @@ class TechnologyController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async available({ response }) {
+  async available({ request, response }) {
     const dateToday = new Date();
 
     const technologies = await Technology.query()

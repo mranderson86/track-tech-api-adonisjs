@@ -47,6 +47,7 @@ class UserController {
    * @param {View} ctx.view
    */
   async checkins({ auth, request, response, view }) {
+    const dateToday = new Date();
     // OK - Filtra todos os usuários que fizeram check-in no dia
     // e quais foram as tecnologias foram feitas o chck-in
     const techs = await User.query()
