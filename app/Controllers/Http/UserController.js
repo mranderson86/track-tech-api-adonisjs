@@ -46,10 +46,10 @@ class UserController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async checkins({ auth, request, response, view }) {
+  async technologies({ auth, request, response, view }) {
     const dateToday = new Date();
     // OK - Filtra todos os usuários que fizeram check-in no dia
-    // e quais foram as tecnologias foram feitas o chck-in
+    // e quais foram as tecnologias foram feitas o check-in
     const techs = await User.query()
       .whereHas("technologies", ">", 0)
       .with("technologies", builder => {

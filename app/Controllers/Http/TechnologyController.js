@@ -1,6 +1,6 @@
 "use strict";
 
-const technologyModel = use("App/Models/Technology");
+const Technology = use("App/Models/Technology");
 
 /** @typedef {import('@adonisjs/framework/src/Request')} Request */
 /** @typedef {import('@adonisjs/framework/src/Response')} Response */
@@ -20,7 +20,7 @@ class TechnologyController {
    * @param {View} ctx.view
    */
   async index({ request, response, view }) {
-    const technologies = await technologyModel.all();
+    const technologies = await Technology.all();
 
     return technologies;
   }
@@ -52,10 +52,12 @@ class TechnologyController {
    * Show a list of all technologies.
    * GET users by technology
    *
+   * @param {object} ctx
    * @param {Request} ctx.request
    * @param {Response} ctx.response
+   * @param {View} ctx.view
    */
-  async checkins({ request, response }) {
+  async users({ request, response }) {
     const dateToday = new Date();
 
     const users = await Technology.query()
@@ -79,7 +81,7 @@ class TechnologyController {
   async store({ request, response }) {
     const data = request.only(["technology"]);
     // cadastra uma nova tecnologias
-    const technology = await technologyModel.create(data);
+    const technology = await Technology.create(data);
 
     return technology;
   }
@@ -94,7 +96,7 @@ class TechnologyController {
    * @param {View} ctx.view
    */
   async show({ params, request, response, view }) {
-    const technology = await technologyModel.findOrFail(params.id);
+    const technology = await Technology.findOrFail(params.id);
 
     return technology;
   }
@@ -118,7 +120,7 @@ class TechnologyController {
    * @param {Response} ctx.response
    */
   async destroy({ params, request, response }) {
-    const technology = await technologyModel.findOrFail(params.id);
+    const technology = await Technology.findOrFail(params.id);
 
     await technology.delete();
   }

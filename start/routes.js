@@ -45,7 +45,7 @@ Route.group(() => {
   Route.get("/users/profile", "UserController.show");
 
   // consulta tecnologias por usuário
-  Route.get("/users/checkins", "UserController.checkins");
+  Route.get("/users/technologies", "UserController.technologies");
 
   // Cadastro de Tecnologias
   Route.post("/technologies", "TechnologyController.store");
@@ -54,7 +54,7 @@ Route.group(() => {
   Route.get("/technologies", "TechnologyController.index");
 
   // Consulta Check-Ins por tecnologia
-  Route.get("/technologies/checkins", "TechnologyController.checkins");
+  Route.get("/technologies/users", "TechnologyController.users");
 
   //Route.resource("/checkins", "CheckInController");
   // Cadastro de check-ins
