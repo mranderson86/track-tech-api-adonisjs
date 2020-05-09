@@ -39,8 +39,8 @@ class TechnologyController {
     const dateToday = new Date();
 
     const technologies = await Technology.query()
-      .whereHas("users", ">", 0)
-      .with("users", builder => {
+      .whereHas("users", "=", 0)
+      .with("users", (builder) => {
         builder.wherePivot("date_checkIn", dateToday);
       })
       .fetch();
@@ -62,7 +62,7 @@ class TechnologyController {
 
     const users = await Technology.query()
       .whereHas("users", ">", 0)
-      .with("users", builder => {
+      .with("users", (builder) => {
         builder.wherePivot("date_checkIn", dateToday);
       })
       .fetch();
