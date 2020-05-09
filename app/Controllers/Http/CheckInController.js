@@ -48,7 +48,7 @@ class CheckInController {
     // e quais foram as tecnologias foram feitas o chck-in
     const techs = await User.query()
       .whereHas("technologies", ">", 0)
-      .with("technologies", builder => {
+      .with("technologies", (builder) => {
         builder.wherePivot("date_checkIn", dateToday);
       })
       .fetch();
@@ -73,12 +73,12 @@ class CheckInController {
     // Converte um objeto em array
     const technologies = Object.values(request.body);
 
-    const data = technologies.map(tech => {
-      const { technology_id } = tech;
+    const data = technologies.map((tech) => {
+      const { id } = tech;
       return {
-        technology_id,
+        technology_id: id,
         user_id: auth.user.id,
-        date_checkIn: new Date()
+        date_checkIn: new Date(),
       };
     });
 

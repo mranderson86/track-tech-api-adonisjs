@@ -56,7 +56,6 @@ Route.group(() => {
   // Consulta Check-Ins por tecnologia
   Route.get("/technologies/users", "TechnologyController.users");
 
-  //Route.resource("/checkins", "CheckInController");
   // Cadastro de check-ins
   Route.post("/checkins", "CheckInController.store");
 }).middleware("auth");
