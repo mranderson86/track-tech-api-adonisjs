@@ -39,13 +39,16 @@ class TechnologyController {
     const dateToday = new Date();
 
     const technologies = await Technology.query()
-      .whereHas("users", "=", 0)
       .with("users", (builder) => {
         builder.wherePivot("date_checkIn", dateToday);
       })
       .fetch();
 
-    return technologies;
+    const result = technologies
+      .toJSON()
+      .filter((technology) => technology.users.length === 0);
+
+    return result;
   }
 
   /**
