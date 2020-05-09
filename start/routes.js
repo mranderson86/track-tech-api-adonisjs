@@ -53,6 +53,9 @@ Route.group(() => {
   // Consulta todas as tecnologias
   Route.get("/technologies", "TechnologyController.index");
 
+  // Consulta tecnologia disponível para o usuário
+  Route.get("/technologies/available", "TechnologyController.available");
+
   // Consulta Check-Ins por tecnologia
   Route.get("/technologies/users", "TechnologyController.users");
 
