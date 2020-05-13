@@ -35,12 +35,13 @@ class TechnologyController {
    * @param {Response} ctx.response
    * @param {View} ctx.view
    */
-  async available({ request, response }) {
+  async available({ request, response, auth }) {
     const dateToday = new Date();
 
     const technologies = await Technology.query()
       .with("users", (builder) => {
         builder.wherePivot("date_checkIn", dateToday);
+        builder.wherePivot("user_id", auth.user.id);
       })
       .fetch();
 
