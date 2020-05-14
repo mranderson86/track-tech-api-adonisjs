@@ -33,7 +33,6 @@ class UserController {
    */
   async show({ auth, request, response, view }) {
     const user = await User.findOrFail(auth.user.id);
-    // const userCheckin = user.checkIns().fetch();
     return user;
   }
 
@@ -52,7 +51,7 @@ class UserController {
     // e quais foram as tecnologias foram feitas o check-in
     const techs = await User.query()
       .whereHas("technologies", ">", 0)
-      .with("technologies", builder => {
+      .with("technologies", (builder) => {
         builder.wherePivot("date_checkIn", dateToday);
       })
       .fetch();
@@ -66,6 +65,19 @@ class UserController {
     const user = await User.create(data);
 
     return user;
+  }
+
+  /**
+   * atualiza dados do usuário
+   */
+  async update({ auth, request }) {
+    const { username } = request.body;
+    const user = await User.findOrFail(auth.user.id);
+
+    user.username = username;
+    const response = await user.save();
+
+    return response;
   }
 }
 

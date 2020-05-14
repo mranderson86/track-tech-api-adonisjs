@@ -44,6 +44,8 @@ Route.group(() => {
   // consulta perfil do usuário
   Route.get("/users/profile", "UserController.show");
 
+  Route.put("/users", "UserController.update");
+
   // consulta tecnologias por usuário
   Route.get("/users/technologies", "UserController.technologies");
 
