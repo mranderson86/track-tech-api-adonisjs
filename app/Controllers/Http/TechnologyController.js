@@ -71,7 +71,11 @@ class TechnologyController {
       })
       .fetch();
 
-    return users;
+    const result = users
+      .toJSON()
+      .filter((technology) => technology.users.length !== 0);
+
+    return result;
   }
 
   /**

@@ -56,7 +56,11 @@ class UserController {
       })
       .fetch();
 
-    return techs;
+    const result = techs
+      .toJSON()
+      .filter((user) => user.technologies.length !== 0);
+
+    return result;
   }
 
   async create({ request }) {
