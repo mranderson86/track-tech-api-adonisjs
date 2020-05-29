@@ -1,27 +1,9 @@
-# Backend for application Tracking of Technology
+# REST API para app mobile Tracking of Technology
 
-This is the boilerplate for creating an API server in AdonisJs, it comes pre-configured with.
+## Descrição
 
-1. Bodyparser
-2. Authentication
-3. CORS
-4. Lucid ORM
-5. Migrations and seeds
+- Projeto **REST API** criado com framework [ADONIS.JS 4.1](https://adonisjs.com/);
+  ![alt adonis](https://adonisjs.com/images/favicons/favicon-32x32.png "Adonis.js")
 
-## Setup
-
-Use the adonis command to install the blueprint
-
-```bash
-adonis new yardstick --api-only
-```
-
-or manually clone the repo and then run `npm install`.
-
-### Migrations
-
-Run the following command to run startup migrations.
-
-```js
-adonis migration:run
-```
+- Integrado com **Banco de Dados Relacional** [POSTGRESQL](https://www.postgresql.org/);
+  ![alt postgres](https://www.postgresql.org/favicon.ico "PostgresQL")
