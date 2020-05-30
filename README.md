@@ -7,17 +7,17 @@
 
 2. Projeto **REST API** criado com framework [ADONIS.JS 4.1](https://adonisjs.com/)
    ![alt adonis](https://adonisjs.com/images/favicons/favicon-32x32.png "Adonis.js")
-   .._ Cadastro de usuários
-   .._ Autenticação de usuário usando **JWT Token**
-   .._ Cadastro de tecnologias
-   .._ Cadastro de tecnologias usadas no dia pelo usuário
-   .._ Consulta de tecnologias para cada usuário
-   .._ Consulta de usuários para cada tecnologia
-   .._ Consulta de tecnologias para cada usuário
-   .._ Consulta de perfil de usuário
+   1. Cadastro de usuários
+   2. Autenticação de usuário usando **JWT Token**
+   3. Cadastro de tecnologias
+   4. Cadastro de tecnologias usadas no dia pelo usuário
+   5. Consulta de tecnologias para cada usuário
+   6. Consulta de usuários para cada tecnologia
+   7. Consulta de tecnologias para cada usuário
+   8. Consulta de perfil de usuário
 
 3. Integrado com **Banco de Dados Relacional** [POSTGRESQL](https://www.postgresql.org/)
    ![alt postgres](https://www.postgresql.org/favicon.ico "PostgresQL")
-   .._ Tabela de Usuários
-   .._ Tabela de Tecnologias
-   ..\* Tabela de Relacionamento entre Usuários x Tecnologias
+   1. Tabela de Usuários
+   2. Tabela de Tecnologias
+   3. Tabela de Relacionamento entre Usuários x Tecnologias
